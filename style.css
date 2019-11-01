@@ -1,0 +1,121 @@
+/*
+	Theme Name: Aspen
+	Theme URI: https://henryholtgeerts.com/aspen
+	Description: A simple SPA style Wordpress theme.
+	Version: 0.0.1
+	Author: Henry Holtgeerts
+	Author URI: https://henryholtgeerts.com
+	Tags: SPA, HTML5, CSS3
+
+	License: MIT
+	License URI: http://opensource.org/licenses/mit-license.php
+*/
+
+/* General */
+
+body { 
+	line-height: 1.6;
+	font-size: 18px;
+	font-family: 'Noto Serif', serif;
+	color: #444;
+	margin: 0;
+	padding: 0;
+}
+
+/* Typgoraphy */
+
+h1, h2, h3 {
+	line-height: 1.2;
+}
+
+/* Menus */
+
+.menu {
+	height: 100%;
+}
+
+.menu > ul {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
+.menu li {
+	margin: 0 4px;
+}
+
+.menu a {
+	padding: 4px;
+	text-decoration: none;
+	color: #929292
+}
+
+.menu a:hover {
+	color: #424242;
+}
+
+.menu .current-menu-item a {
+	color: #424242;
+}
+
+/* Layout */
+
+.grid {
+	display: grid;
+	grid-template-columns: auto repeat(12, 55px) auto;
+	grid-template-rows: auto;
+}
+
+.branding {
+	grid-column: 2 / span 4;
+	padding: 18px 0;
+}
+
+.nav {
+	grid-column: span 8;
+	padding: 18px 0;
+}
+
+.main {
+	grid-column: span 14;
+}
+
+.footer {
+	grid-column: 2 / span 12;
+	padding: 26px 0;
+}
+
+/* Branding */
+
+.branding a {
+	font-weight: bold;
+	font-size: 22px;
+	text-decoration: none;
+	color: #454545;
+}
+
+/* Main */
+
+.main > * {
+	max-width: 660px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.main > .alignwide {
+	max-width: 960px;
+}
+
+.main > .alignfull {
+	max-width: 100%;
+}
+
+/* WP Core */
+
+.wp-block-cover__inner-container {
+	max-width: 660px;
+}
