@@ -1,13 +1,10 @@
 <?php get_header(); ?>
 
-	<main>
-		<!-- section -->
-		<section>
+	<main class="main">
 
-			<h1>404</h1>
+		<h1>404</h1>
+		<p>Content could not be found. :(</p>
 
-		</section>
-		<!-- /section -->
 	</main>
 
 <?php get_footer(); ?>
