@@ -20,7 +20,7 @@ Kirki::add_field( 'aspen_theme', [
 	'transport'   => 'auto',
 	'output'      => [
 		[
-			'element' => ['h1', 'h2', 'h3', '.branding a'],
+			'element' => ['h1', 'h2', 'h3'],
 		],
 	],
 ] );

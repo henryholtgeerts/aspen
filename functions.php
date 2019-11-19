@@ -17,6 +17,12 @@ require_once get_stylesheet_directory() . '/includes/kirki/kirki.php';
 // customizer settings
 require_once get_stylesheet_directory() . '/includes/customizer/customizer.php';
 
+// conditional header
+require_once get_stylesheet_directory() . '/includes/conditional/header/aspen-header.php';
+
+// conditional styles
+require_once get_stylesheet_directory() . '/includes/conditional/styles/aspen-styles.php';
+
 /*------------------------------------*\
 	Theme Support
 \*------------------------------------*/
@@ -57,11 +63,31 @@ if (function_exists('add_theme_support'))
 	Functions
 \*------------------------------------*/
 
-// Aspen navigation
-function aspen_nav()
-{
-	wp_nav_menu(
-	array(
+//Super nav
+function aspen_super_nav() {
+    wp_nav_menu([
+		'theme_location'  => 'super-menu',
+		'menu'            => '',
+		'container'       => 'div',
+		'container_class' => 'menu',
+		'container_id'    => '',
+		'menu_class'      => 'menu',
+		'menu_id'         => '',
+		'echo'            => true,
+		'fallback_cb'     => 'wp_page_menu',
+		'before'          => '',
+		'after'           => '',
+		'link_before'     => '',
+		'link_after'      => '',
+		'items_wrap'      => '<ul>%3$s</ul>',
+		'depth'           => 0,
+		'walker'          => ''
+    ]);
+}
+
+//Primary nav
+function aspen_primary_nav() {
+    wp_nav_menu([
 		'theme_location'  => 'primary-menu',
 		'menu'            => '',
 		'container'       => 'div',
@@ -78,8 +104,29 @@ function aspen_nav()
 		'items_wrap'      => '<ul>%3$s</ul>',
 		'depth'           => 0,
 		'walker'          => ''
-		)
-	);
+    ]);
+}
+
+//Secondary nav
+function aspen_secondary_nav() {
+    wp_nav_menu([
+		'theme_location'  => 'secondary-menu',
+		'menu'            => '',
+		'container'       => 'div',
+		'container_class' => 'menu',
+		'container_id'    => '',
+		'menu_class'      => 'menu',
+		'menu_id'         => '',
+		'echo'            => true,
+		'fallback_cb'     => 'wp_page_menu',
+		'before'          => '',
+		'after'           => '',
+		'link_before'     => '',
+		'link_after'      => '',
+		'items_wrap'      => '<ul>%3$s</ul>',
+		'depth'           => 0,
+		'walker'          => ''
+    ]);
 }
 
 // Load Aspen scripts (header.php)
@@ -93,11 +140,18 @@ function aspen_header_scripts()
         wp_register_script('aspen-scripts', get_template_directory_uri() . '/assets/js/scripts.js', ['jquery', 'pjax'], '1.0.0'); // Custom scripts
         wp_enqueue_script('aspen-scripts'); // Enqueue it!
 
+        $data = [
+            'content_width' => get_theme_mod('content_width', ''),
+            'layout' => get_theme_mod('layout_type', '')
+        ];
+
+        wp_localize_script( 'aspen-scripts', 'aspen_data', $data );
+
     }
 }
 
 // Load Aspen styles
-function aspen_styles()
+function load_aspen_styles()
 {
     wp_register_style('aspen-style', get_template_directory_uri() . '/style.css', array(), '1.0', 'all');
     wp_enqueue_style('aspen-style'); // Enqueue it!
@@ -108,8 +162,8 @@ function register_aspen_menu()
 {
     register_nav_menus(array( // Using array to specify more menus if needed
         'primary-menu' => __('Primary Menu', 'aspen'), // Main Navigation
+        'super-menu' => __('Super Menu', 'aspen'), // Main Navigation
         'secondary-menu' => __('Secondary Menu', 'aspen'), // Main Navigation
-        'sidebar-menu' => __('Sidebar Menu', 'aspen'), // Sidebar Navigation
         'footer-menu' => __('Footer Menu', 'aspen') // Extra Navigation if needed (duplicate as many as you need!)
     ));
 }
@@ -143,24 +197,46 @@ if (function_exists('register_sidebar'))
 {
     // Define Sidebar Widget Area 1
     register_sidebar(array(
-        'name' => __('Widget Area 1', 'aspen'),
+        'name' => __('Header Widgets', 'aspen'),
         'description' => __('Description for this widget-area...', 'aspen'),
-        'id' => 'widget-area-1',
+        'id' => 'header-widget-area',
         'before_widget' => '<div id="%1$s" class="%2$s">',
         'after_widget' => '</div>',
-        'before_title' => '<h3>',
-        'after_title' => '</h3>'
+        'before_title'  => '<!-- ',
+        'after_title'   => ' -->',
     ));
 
     // Define Sidebar Widget Area 2
     register_sidebar(array(
-        'name' => __('Widget Area 2', 'aspen'),
+        'name' => __('Primary Menu Widgets', 'aspen'),
         'description' => __('Description for this widget-area...', 'aspen'),
-        'id' => 'widget-area-2',
+        'id' => 'primary-menu-widget-area',
         'before_widget' => '<div id="%1$s" class="%2$s">',
         'after_widget' => '</div>',
-        'before_title' => '<h3>',
-        'after_title' => '</h3>'
+        'before_title'  => '<!-- ',
+        'after_title'   => ' -->',
+    ));
+
+    // Define Sidebar Widget Area 2
+    register_sidebar(array(
+        'name' => __('Super Menu Widgets', 'aspen'),
+        'description' => __('Description for this widget-area...', 'aspen'),
+        'id' => 'super-menu-widget-area',
+        'before_widget' => '<div id="%1$s" class="%2$s">',
+        'after_widget' => '</div>',
+        'before_title'  => '<!-- ',
+        'after_title'   => ' -->',
+    ));
+
+    // Define Sidebar Widget Area 2
+    register_sidebar(array(
+        'name' => __('Secondary Menu Widgets', 'aspen'),
+        'description' => __('Description for this widget-area...', 'aspen'),
+        'id' => 'secondary-menu-widget-area',
+        'before_widget' => '<div id="%1$s" class="%2$s">',
+        'after_widget' => '</div>',
+        'before_title'  => '<!-- ',
+        'after_title'   => ' -->',
     ));
 }
 
@@ -255,7 +331,7 @@ function enable_threaded_comments()
 // Add Actions
 add_action('init', 'aspen_header_scripts'); // Add Custom Scripts to wp_head
 add_action('get_header', 'enable_threaded_comments'); // Enable Threaded Comments
-add_action('wp_enqueue_scripts', 'aspen_styles'); // Add Theme Stylesheet
+add_action('wp_enqueue_scripts', 'load_aspen_styles'); // Add Theme Stylesheet
 add_action('init', 'register_aspen_menu'); // Add Aspen Menu
 add_action('widgets_init', 'aspen_remove_recent_comments_style'); // Remove inline Recent Comment Styles from wp_head()
 add_action('init', 'aspen_wp_pagination'); // Add our HTML5 Pagination
@@ -286,6 +362,7 @@ add_filter('excerpt_more', 'aspen_blank_view_article'); // Add 'View Article' bu
 add_filter('style_loader_tag', 'aspen_style_remove'); // Remove 'text/css' from enqueued stylesheet
 add_filter('post_thumbnail_html', 'remove_thumbnail_dimensions', 10); // Remove width and height dynamic attributes to thumbnails
 add_filter('image_send_to_editor', 'remove_thumbnail_dimensions', 10); // Remove width and height dynamic attributes to post images
+add_filter('show_admin_bar', '__return_false');
 
 // Remove Filters
 remove_filter('the_excerpt', 'wpautop'); // Remove <p> tags from Excerpt altogether

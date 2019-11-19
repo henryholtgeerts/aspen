@@ -3,7 +3,7 @@
 $directory = get_stylesheet_directory() . '/includes/customizer/panels/layout';
 
 Kirki::add_panel( 'aspen_layout', array(
-    'priority'    => 10,
+    'priority'    => 40,
     'title'       => esc_html__( 'Layout', 'kirki' ),
     'description' => esc_html__( 'My panel description', 'kirki' ),
 ) );

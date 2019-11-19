@@ -47,6 +47,7 @@ Kirki::add_field( 'aspen_theme', [
 	'default'     => 'normal',
 	'priority'    => 10,
 	'choices'     => [
+		'none'   => esc_html__( 'None', 'aspen' ),
 		'dense'   => esc_html__( 'Dense', 'aspen' ),
 		'normal' => esc_html__( 'Normal', 'aspen' ),
 		'extra'  => esc_html__( 'Extra', 'aspen' ),
@@ -60,4 +61,15 @@ Kirki::add_field( 'aspen_theme', [
 	'description' => esc_html__( 'This is a color control - without alpha channel.', 'aspen' ),
 	'section'     => 'layout_branding',
 	'default'     => '#0088CC',
+	'choices'     => [
+		'alpha' => true,
+	],
+] );
+
+Kirki::add_field( 'aspen_theme', [
+	'type'        => 'toggle',
+	'settings'    => 'square_branding',
+	'label'       => esc_html__( 'Make square', 'aspen' ),
+	'section'     => 'layout_branding',
+	'default'     => '1',
 ] );

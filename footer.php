@@ -1,9 +1,14 @@
 			<!-- footer -->
 			<footer class="footer">
 
-				<hr>
+				<?php 
+				$show_divider = get_theme_mod( 'show_footer_divider', '');
+				if ($show_divider) {
+					echo '<hr>';
+				}
+				?>
 
-				<div class="widgets">
+				<div class="footer-widgets">
 					<div>
 						<a href="https://github.com/henryholtgeerts">
 							<i class="fab fa-github"></i>

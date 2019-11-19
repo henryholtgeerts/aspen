@@ -1,7 +1,7 @@
 <?php
 
-Kirki::add_section( 'typography_body', array(
-    'title'          => esc_html__( 'Body', 'aspen' ),
+Kirki::add_section( 'typography_paragraph', array(
+    'title'          => esc_html__( 'Paragraph', 'aspen' ),
     'description'    => esc_html__( 'My section description.', 'kirki' ),
     'panel'          => 'aspen_typography',
     'priority'       => 40,
@@ -9,9 +9,9 @@ Kirki::add_section( 'typography_body', array(
 
 Kirki::add_field( 'aspen_theme', [
 	'type'        => 'typography',
-	'settings'    => 'body_typography',
-	'label'       => esc_html__( 'Body style', 'aspen' ),
-	'section'     => 'typography_body',
+	'settings'    => 'paragraph_typography',
+	'label'       => esc_html__( 'Paragraph style', 'aspen' ),
+	'section'     => 'typography_paragraph',
 	'default'     => [
 		'font-family'    => 'Roboto',
 		'color'          => '#333333',
@@ -20,7 +20,7 @@ Kirki::add_field( 'aspen_theme', [
 	'transport'   => 'auto',
 	'output'      => [
 		[
-			'element' => ['p', 'a'],
+			'element' => ['p', 'a', '.footer'],
 		],
 	],
 ] );

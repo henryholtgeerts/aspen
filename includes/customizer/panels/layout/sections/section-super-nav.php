@@ -24,9 +24,10 @@ Kirki::add_field( 'aspen_theme', [
 	'default'     => 'left',
 	'priority'    => 10,
 	'choices'     => [
-		'left'   => esc_html__( 'Left', 'kirki' ),
+		'flex-start'   => esc_html__( 'Left', 'kirki' ),
 		'center' => esc_html__( 'Center', 'kirki' ),
-		'right'  => esc_html__( 'Right', 'kirki' ),
+		'flex-end'  => esc_html__( 'Right', 'kirki' ),
+		'space-between' => esc_html( 'Spread', '')
 	],
 ] );
 
@@ -65,7 +66,6 @@ Kirki::add_field( 'aspen_theme', [
 	'choices'     => [
 		'menu' => esc_html__( 'Menu', 'aspen' ),
 		'icons' => esc_html__( 'Icons', 'aspen' ),
-        'widgets' => esc_html__( 'Widgets', 'aspen' ),
         'search' => esc_html__( 'Search', 'aspen' )
 	],
 	'priority'    => 10,

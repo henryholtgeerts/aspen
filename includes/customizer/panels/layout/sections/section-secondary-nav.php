@@ -18,28 +18,15 @@ Kirki::add_field( 'aspen_theme', [
 
 Kirki::add_field( 'aspen_theme', [
 	'type'        => 'radio-buttonset',
-	'settings'    => 'secondary_nav_direction',
-	'label'       => esc_html__( 'Direction', 'aspen' ),
-	'section'     => 'layout_secondary_nav',
-	'default'     => 'horizontal',
-	'priority'    => 10,
-	'choices'     => [
-		'horizontal'   => esc_html__( 'Horizontal', 'aspen' ),
-		'vertical' => esc_html__( 'Vertical', 'aspen' ),
-	],
-] );
-
-Kirki::add_field( 'aspen_theme', [
-	'type'        => 'radio-buttonset',
 	'settings'    => 'secondary_nav_justification',
 	'label'       => esc_html__( 'Justify', 'aspen' ),
 	'section'     => 'layout_secondary_nav',
 	'default'     => 'left',
 	'priority'    => 10,
 	'choices'     => [
-		'left'   => esc_html__( 'Left', 'kirki' ),
+		'flex-start'   => esc_html__( 'Left', 'kirki' ),
 		'center' => esc_html__( 'Center', 'kirki' ),
-		'right'  => esc_html__( 'Right', 'kirki' ),
+		'flex-end'  => esc_html__( 'Right', 'kirki' ),
 	],
 ] );
 
